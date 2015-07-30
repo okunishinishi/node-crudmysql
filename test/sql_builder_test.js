@@ -22,7 +22,7 @@ exports['Build select sql.'] = function (test) {
         builder.selectSql('Bar', {
             baz: 'quz'
         }),
-        "SELECT * FROM Bar WHERE (baz = 'quz')"
+        "SELECT * FROM Bar WHERE (Bar.baz = 'quz')"
     );
 
     test.equal(
@@ -31,7 +31,7 @@ exports['Build select sql.'] = function (test) {
         }, {
             fields: ["count(1)"]
         }),
-        "SELECT count(1) FROM Bar WHERE (baz = 'quz')"
+        "SELECT count(1) FROM Bar WHERE (Bar.baz = 'quz')"
     );
     test.equal(
         builder.selectSql('Bar', {
@@ -39,7 +39,7 @@ exports['Build select sql.'] = function (test) {
         }, {
             order: ["baz", {quz: false}]
         }),
-        "SELECT * FROM Bar WHERE (baz = 'quz') ORDER BY baz ASC, quz DESC"
+        "SELECT * FROM Bar WHERE (Bar.baz = 'quz') ORDER BY baz ASC, quz DESC"
     );
     test.equal(
         builder.selectSql('Bar', {
@@ -48,7 +48,7 @@ exports['Build select sql.'] = function (test) {
             limit: 40,
             offset: 8
         }),
-        "SELECT * FROM Bar WHERE (baz = 'quz') LIMIT 40 OFFSET 8"
+        "SELECT * FROM Bar WHERE (Bar.baz = 'quz') LIMIT 40 OFFSET 8"
     );
     test.done();
 };
@@ -62,7 +62,7 @@ exports['Build update sql.'] = function (test) {
         }, {
             baz: 'quz'
         }),
-        "UPDATE Bar SET baz = 'quz' WHERE (id = '3')"
+        "UPDATE Bar SET baz = 'quz' WHERE (Bar.id = '3')"
     );
     test.done();
 };
@@ -74,7 +74,7 @@ exports['Build delete sql.'] = function (test) {
         builder.deleteSql('Bar', {
             id: '3'
         }),
-        "DELETE FROM Bar WHERE (id = '3')"
+        "DELETE FROM Bar WHERE (Bar.id = '3')"
     );
     test.done();
 };
