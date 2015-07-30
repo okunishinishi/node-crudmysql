@@ -1,5 +1,5 @@
 {
-  "name": "mysqlclud",
+  "name": "mysqlcrud",
   "version": "1.0.0",
   "description": "Simple crud functions with mysql database.",
   "main": "index.js",
