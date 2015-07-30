@@ -32,7 +32,7 @@ exports['Mysqlcrud table'] = function (test) {
     var table = new MysqlcrudTable('TEST_PERSON', {
         connection: connection
     });
-    var insertId;
+    var insertId, insertId2;
     async.series([
         function (callback) {
             table.create({
@@ -42,6 +42,17 @@ exports['Mysqlcrud table'] = function (test) {
                 test.ifError(err);
                 test.ok(result);
                 insertId = result.insertId;
+                callback(err, result);
+            });
+        },
+        function (callback) {
+            table.create({
+                last_name: 'foo2',
+                first_name: 'baz2'
+            }, function (err, result) {
+                test.ifError(err);
+                test.ok(result);
+                insertId2 = result.insertId;
                 callback(err, result);
             });
         },
@@ -61,7 +72,27 @@ exports['Mysqlcrud table'] = function (test) {
             });
         },
         function (callback) {
+            table.count({}, {
+                order: ['last_name']
+            }, function (err, count) {
+                test.ifError(err);
+                test.ok(count);
+                callback(err)
+            });
+        },
+        function (callback) {
             table.list({}, function (err, data) {
+                test.ifError(err);
+                test.ok(data.length);
+                callback(err)
+            });
+        },
+        function (callback) {
+            table.list({}, {
+                order: [{'last_name': false}],
+                limit: 1,
+                offset: 1
+            }, function (err, data) {
                 test.ifError(err);
                 test.ok(data.length);
                 callback(err)
