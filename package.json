@@ -1,7 +1,7 @@
 {
   "name": "mysqlclud",
   "version": "1.0.0",
-  "description": "Implment simple crud with mysql database.",
+  "description": "Simple crud functions with mysql database.",
   "main": "index.js",
   "scripts": {
     "test": "nodeunit test/*._test.js",

@@ -1,7 +1,7 @@
-crudmysql
+mysqlclud
 =====
 
-Parse function arguments. Useful to implement variadic functions.
+Implment simple crud with mysql database.
 
 <!-- Badge start -->
 
