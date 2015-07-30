@@ -18,6 +18,6 @@ exports['Build select sql.'] = function (test) {
     var sql = new SqlBuilder().selectSql('Bar', {
         baz: 'quz'
     });
-    test.equal(sql, "SELECT * FROM Bar WHERE (baz='quz')");
+    test.equal(sql, "SELECT * FROM Bar WHERE (baz = 'quz')");
     test.done();
 };
