@@ -33,6 +33,23 @@ exports['Build select sql.'] = function (test) {
         }),
         "SELECT count(1) FROM Bar WHERE (baz = 'quz')"
     );
+    test.equal(
+        builder.selectSql('Bar', {
+            baz: 'quz'
+        }, {
+            order: ["baz", {quz: false}]
+        }),
+        "SELECT * FROM Bar WHERE (baz = 'quz') ORDER BY baz ASC, quz DESC"
+    );
+    test.equal(
+        builder.selectSql('Bar', {
+            baz: 'quz'
+        }, {
+            limit: 40,
+            offset: 8
+        }),
+        "SELECT * FROM Bar WHERE (baz = 'quz') LIMIT 40 OFFSET 8"
+    );
     test.done();
 };
 
