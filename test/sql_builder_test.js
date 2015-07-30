@@ -6,18 +6,58 @@
 var SqlBuilder = require('../lib/sql/sql_builder.js');
 
 exports['Build insert sql.'] = function (test) {
-    var sql = new SqlBuilder().insertSql('Foo', {
-        bar: 'baz'
-    });
-    test.equal(sql, "INSERT INTO Foo (bar) VALUES ('baz')");
+    var builder = new SqlBuilder();
+    test.equal(builder.insertSql('Foo', {
+            bar: 'baz'
+        }),
+        "INSERT INTO Foo (bar) VALUES ('baz')"
+    );
     test.done();
 };
 
 
 exports['Build select sql.'] = function (test) {
-    var sql = new SqlBuilder().selectSql('Bar', {
-        baz: 'quz'
-    });
-    test.equal(sql, "SELECT * FROM Bar WHERE (baz = 'quz')");
+    var builder = new SqlBuilder();
+    test.equal(
+        builder.selectSql('Bar', {
+            baz: 'quz'
+        }),
+        "SELECT * FROM Bar WHERE (baz = 'quz')"
+    );
+
+    test.equal(
+        builder.selectSql('Bar', {
+            baz: 'quz'
+        }, {
+            fields: ["count(1)"]
+        }),
+        "SELECT count(1) FROM Bar WHERE (baz = 'quz')"
+    );
+    test.done();
+};
+
+
+exports['Build update sql.'] = function (test) {
+    var builder = new SqlBuilder();
+    test.equal(
+        builder.updateSql('Bar', {
+            id: '3'
+        }, {
+            baz: 'quz'
+        }),
+        "UPDATE Bar SET baz = 'quz' WHERE (id = '3')"
+    );
+    test.done();
+};
+
+
+exports['Build delete sql.'] = function (test) {
+    var builder = new SqlBuilder();
+    test.equal(
+        builder.deleteSql('Bar', {
+            id: '3'
+        }),
+        "DELETE FROM Bar WHERE (id = '3')"
+    );
     test.done();
 };

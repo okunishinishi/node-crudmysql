@@ -16,7 +16,8 @@
   },
   "keywords": [
     "mysql",
-    "crud"
+    "crud",
+    "rest"
   ],
   "author": {
     "name": "Taka Okunishi",
