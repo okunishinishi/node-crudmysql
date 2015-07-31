@@ -21,7 +21,7 @@ npm install mysqlcrud --save
 Usage
 -----
 
-### Connect/Disconnect
+### Connect to Database
 
 Pass [node-mysql connection config](https://github.com/felixge/node-mysql/#connection-options) to connect mysql database.
 
@@ -38,13 +38,16 @@ mysqlcrud.connect({
 });
 ```
 
+
+### Disconnect from Database
+
 Ensure to disconnect from database before exit.
 
 ```javascript
 mysqlcrud.disconnect();
 ```
 
-### Execute sql.
+### Execute a SQL
 
 ```javascript
 mysqlcrud.execute('show tables', function () {
@@ -52,7 +55,7 @@ mysqlcrud.execute('show tables', function () {
 });
 ```
 
-### CRUD with table.
+### Accessing a Table
 
 mysqlcrud table provides basic CURD functions.
 
@@ -63,14 +66,17 @@ var userTable = mysqlcrud.table('user', {
     idKey: 'user_id'
 });
 
-
-
-
 ```
 
-###### `.create(data)`
+**Table Optoins**
 
-Create a single data.
+| Key | Description | Example |
+| --- | ----------- | ------- |
+| idKey | Key for id column. | 'user_id' |
+
+
+
+### Create a Record on a Table
 
 ```javascript
 var userTable = mysqlcrud.table('user', {/*options*/});
@@ -85,9 +91,8 @@ userTable.create({
 
 ```
 
-##### `.one(id)`
 
-Get a single data.
+### Find a Record from a Table
 
 ```javascript
 var userTable = mysqlcrud.table('user', {/*options*/});
@@ -99,9 +104,7 @@ userTable.one(3, function (err, data) {
 
 ```
 
-##### `.update(id)`
-
-Update a single data.
+### Update a Record in a Table
 
 ```javascript
 var userTable = mysqlcrud.table('user', {/*options*/});
@@ -115,9 +118,7 @@ userTable.update(3, {
 });
 ```
 
-##### `.destroy(id)`
-
-Destroy a single data.
+### Destroy a Record form a Table
 
 ```javascript
 var userTable = mysqlcrud.table('user', {/*options*/});
@@ -128,18 +129,14 @@ userTable.destroy(3, function (err, result) {
 });
 ```
 
-##### `.count(id)`
-
-Count data.
+#### Count Records in a Table
 
 ```javascript
 
 ```
 
 
-##### `.list(id)`
-
-List data.
+#### List Records from a Table
 
 ```javascript
 var userTable = mysqlcrud.table('user', {/*options*/});
@@ -150,7 +147,7 @@ userTable.list({
         // List condition.
         last_name: 'Okunishi'
     },
-    order: [{'last_name': false}],
+    order: [{'first_name': false}],
     limit: 20,
     offset: 20
 }, function (err, data) {
@@ -161,26 +158,16 @@ userTable.list({
 
 ```
 
-
-
-
-Options
--------
-
-### Table Optoins
-
-| Key | Description | Example |
-| --- | ----------- | ------- |
-| idKey | Key for id column. | 'user_id' |
-
-
-### Table List options
+**List Options**
 
 | Key | Description | Example |
 | --- | ----------- | ------- |
 | order | Column name to order. | ['last_name'] <br> [{'last_name', false}] |
 | limit | Limit count | 20 |
 | offset | Offset count | 20 |
+
+
+
 
 
 Links

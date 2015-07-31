@@ -6,7 +6,7 @@ userTable.list({
         // List condition.
         last_name: 'Okunishi'
     },
-    order: [{'last_name': false}],
+    order: [{'first_name': false}],
     limit: 20,
     offset: 20
 }, function (err, data) {
