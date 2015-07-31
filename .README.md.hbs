@@ -21,14 +21,60 @@ npm install {{pkg.name}} --save
 Usage
 -----
 
+### Connect/Disconnect
+
+Pass [node-mysql connection config](https://github.com/felixge/node-mysql/#connection-options) to connect mysql database.
+
 ```javascript
-{{{read 'docs/usage/usage-01-connect.js'}}}
+{{{read 'docs/usages/01.connect.js'}}}
 ```
+
+Ensure to disconnect from database before exit.
+
+```javascript
+{{{read 'docs/usages/02.disconnect.js'}}}
+```
+
+
+### CRUD with table.
+
+{{pkg.name}} table instance provides basic CURD functions.
+
+```javascript
+{{{read 'docs/usages/03.table.js'}}}
+```
+
+
+Options
+-------
+
+### Table Optoins
+
+| Key | Description | Example |
+| --- | ----------- | ------- |
+| idKey | Key for id column. | 'user_id' |
+
+
+### Table List options
+
+| Key | Description | Example |
+| --- | ----------- | ------- |
+| order | Column name to order. | ['last_name'] <br> [{'last_name', false}] |
+| limit | Limit count | 20 |
+| offset | Offset count | 20 |
+
+
+Links
+-----
+
+{{#each links}}+ [{{@key}}]({{this}})
+{{/each}}
+
+
 
 License
 -------
 This software is released under the [MIT License][my_license_url].
-
 
 
 <!-- Links start -->

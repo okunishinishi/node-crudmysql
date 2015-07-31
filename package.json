@@ -1,11 +1,11 @@
 {
   "name": "mysqlcrud",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Simple crud functions with mysql database.",
   "main": "index.js",
   "scripts": {
-    "test": "nodeunit test/*._test.js",
-    "cover": "istanbul cover nodeunit test/*._test.js --dir coverage",
+    "test": "nodeunit test",
+    "cover": "istanbul cover nodeunit test --dir coverage",
     "report": "codeclimate-test-reporter  < coverage/lcov.info",
     "versionup": "versionup",
     "taggit": "taggit"

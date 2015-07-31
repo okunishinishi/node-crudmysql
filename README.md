@@ -21,22 +21,123 @@ npm install mysqlcrud --save
 Usage
 -----
 
+### Connect/Disconnect
+
+Pass [node-mysql connection config](https://github.com/felixge/node-mysql/#connection-options) to connect mysql database.
+
 ```javascript
 var mysqlcrud = require('mysqlcrud');
 
-
+// Connect to mysql.
+// For more about connection options,
+// see https://github.com/felixge/node-mysql/#connection-options
 mysqlcrud.connect({
     user: 'root',
-    password: 'host'
+    password: 'host',
+    database: 'my_db'
 });
+
+
+```
+
+Ensure to disconnect from database before exit.
+
+```javascript
 
 mysqlcrud.disconnect();
 ```
 
+
+### CRUD with table.
+
+mysqlcrud table instance provides basic CURD functions.
+
+```javascript
+var userTable = mysqlcrud.table('user', {
+    // Table options
+});
+
+// Create a new user record.
+userTable.create({
+    last_name: 'Okunishi',
+    first_name: 'Taka'
+}, function (err, result) {
+    /**...**/
+});
+
+// Get a single user record with id.
+userTable.one(3, function (err, data) {
+    /**...**/
+});
+
+
+// List data.
+userTable.list({
+    // List condition.
+    last_name: 'Okunishi'
+}, {
+    // List Options.
+    order: [{'last_name': false}],
+    limit: 20,
+    offset: 20
+}, function (err, data) {
+    /**...**/
+});
+
+
+// Count data.
+userTable.count({
+    // Count condition.
+    last_name: 'Okunishi'
+}, function (err, data) {
+    /**...**/
+});
+
+
+// Update data.
+userTable.update(3, {
+    // Count condition.
+    last_name: 'Super Okunishi'
+}, function (err, result) {
+    /**...**/
+});
+
+// Destroy data.
+userTable.destroy(3, function (err, result) {
+    /**...**/
+});
+```
+
+
+Options
+-------
+
+### Table Optoins
+
+| Key | Description | Example |
+| --- | ----------- | ------- |
+| idKey | Key for id column. | 'user_id' |
+
+
+### Table List options
+
+| Key | Description | Example |
+| --- | ----------- | ------- |
+| order | Column name to order. | ['last_name'] <br> [{'last_name', false}] |
+| limit | Limit count | 20 |
+| offset | Offset count | 20 |
+
+
+Links
+-----
+
++ [node-mysql](https://github.com/felixge/node-mysql/)
+
+
+
 License
 -------
 This software is released under the [MIT License][my_license_url].
-
 
 
 <!-- Links start -->

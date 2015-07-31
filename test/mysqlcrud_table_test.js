@@ -30,7 +30,8 @@ exports.tearDown = function (done) {
 
 exports['Mysqlcrud table'] = function (test) {
     var table = new MysqlcrudTable('TEST_PERSON', {
-        connection: connection
+        connection: connection,
+        idKey: 'id'
     });
     var insertId, insertId2;
     async.series([
