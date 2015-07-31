@@ -12,11 +12,12 @@ var testDbConfig = require('../ci/configs/test_db_config'),
     setupTestDb = require('../ci/helpers/setup_test_db');
 
 
-var connection = mysql.createConnection(extend({}, testDbConfig, {
-    database: 'crudmysql_test'
-}));
+var connection;
 exports.setUp = function (done) {
     setupTestDb(function (err) {
+        connection = mysql.createConnection(extend({}, testDbConfig, {
+            database: 'crudmysql_test'
+        }));
         connection.connect(function () {
             done();
         });
@@ -121,3 +122,65 @@ exports['Mysqlcrud table'] = function (test) {
     });
 };
 
+
+exports['Do ref.'] = function (test) {
+    var shopTable = new MysqlcrudTable('TEST_SHOP', {
+        connection: connection,
+        idKey: 'id'
+    });
+    var productTable = new MysqlcrudTable('TEST_PRODUCT', {
+        connection: connection,
+        idKey: 'id'
+    });
+    var shopId, productId;
+    async.series([
+        function (callback) {
+            shopTable.create({
+                article: 20,
+                dealer: 'oo',
+                price: 100
+            }, function (err, result) {
+                test.ifError(err);
+                shopId = result.insertId;
+                callback(err);
+            })
+        },
+        function (callback) {
+            productTable.create({
+                shop_id: shopId
+            }, function (err, result) {
+                test.ifError(err);
+                productId = result.insertId;
+                callback(err);
+            })
+        },
+        function (callback) {
+            productTable.list({
+                ref: {
+                    'shop_id': 'test_shop.id'
+                }
+            }, function (err, result) {
+                test.ok(result[0]);
+                test.ok(result[0]['test_shop']);
+                test.ifError(err);
+                callback(err);
+            });
+        },
+        function (callback) {
+            productTable.one(productId, {
+                ref: {
+                    'shop_id': 'test_shop.id'
+                }
+            }, function (err, result) {
+                test.ok(result);
+                test.ok(result['test_shop']);
+                test.ifError(err);
+                callback(err);
+            });
+        }
+    ], function (err) {
+        test.ifError(err);
+        test.done();
+    });
+
+};

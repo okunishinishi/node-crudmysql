@@ -55,6 +55,17 @@ exports['Build select sql.'] = function (test) {
         }),
         "SELECT * FROM Bar WHERE (Bar.baz = 'quz') LIMIT 40 OFFSET 8"
     );
+    test.equal(
+        builder.selectSql('Bar', {
+            where: {
+                baz: 'quz'
+            },
+            ref: {
+                quz_id: 'quz.id'
+            }
+        }),
+        "SELECT * FROM Bar LEFT JOIN quz `quz` ON (Bar.quz_id = quz.id) WHERE (Bar.baz = 'quz')"
+    );
     test.done();
 };
 
