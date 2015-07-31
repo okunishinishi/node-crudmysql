@@ -32,6 +32,27 @@ exports['Connect.'] = function (test) {
         });
 };
 
+exports['Execute.'] = function (test) {
+    var dbConfig = extend({}, testDbConfig, {
+        database: 'crudmysql_test'
+    });
+    var crud = new Mysqlcrud().connect(dbConfig);
+    crud
+        .on('connect', function () {
+            crud.execute("show tables", function (err, result) {
+                test.ifError(err);
+                test.ok(result);
+                crud.disconnect();
+                test.done();
+            });
+        })
+        .on('error', function (err) {
+            test.ifError(err);
+            crud.disconnect();
+            test.done();
+        });
+};
+
 exports['Interact with table.'] = function (test) {
     var dbConfig = extend({}, testDbConfig, {
         database: 'crudmysql_test'
@@ -40,9 +61,7 @@ exports['Interact with table.'] = function (test) {
     crud
         .on('connect', function () {
             var person = crud.table('TEST_PERSON');
-            async.series([
-
-            ], function (err) {
+            async.series([], function (err) {
                 test.ifError(err);
                 crud.disconnect();
                 test.done();

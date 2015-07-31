@@ -8,4 +8,3 @@ mysqlcrud.connect({
     password: 'host',
     database: 'my_db'
 });
-

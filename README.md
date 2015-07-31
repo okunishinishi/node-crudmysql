@@ -36,17 +36,21 @@ mysqlcrud.connect({
     password: 'host',
     database: 'my_db'
 });
-
-
 ```
 
 Ensure to disconnect from database before exit.
 
 ```javascript
-
 mysqlcrud.disconnect();
 ```
 
+### Execute sql.
+
+```javascript
+mysqlcrud.execute('show tables', function () {
+
+});
+```
 
 ### CRUD with table.
 
