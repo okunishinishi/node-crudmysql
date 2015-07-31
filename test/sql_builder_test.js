@@ -20,31 +20,36 @@ exports['Build select sql.'] = function (test) {
     var builder = new SqlBuilder();
     test.equal(
         builder.selectSql('Bar', {
-            baz: 'quz'
+            where: {
+                baz: 'quz'
+            }
         }),
         "SELECT * FROM Bar WHERE (Bar.baz = 'quz')"
     );
 
     test.equal(
         builder.selectSql('Bar', {
-            baz: 'quz'
-        }, {
+            where: {
+                baz: 'quz'
+            },
             fields: ["count(1)"]
         }),
         "SELECT count(1) FROM Bar WHERE (Bar.baz = 'quz')"
     );
     test.equal(
         builder.selectSql('Bar', {
-            baz: 'quz'
-        }, {
+            where: {
+                baz: 'quz'
+            },
             order: ["baz", {quz: false}]
         }),
         "SELECT * FROM Bar WHERE (Bar.baz = 'quz') ORDER BY baz ASC, quz DESC"
     );
     test.equal(
         builder.selectSql('Bar', {
-            baz: 'quz'
-        }, {
+            where: {
+                baz: 'quz'
+            },
             limit: 40,
             offset: 8
         }),
@@ -58,9 +63,12 @@ exports['Build update sql.'] = function (test) {
     var builder = new SqlBuilder();
     test.equal(
         builder.updateSql('Bar', {
-            id: '3'
-        }, {
-            baz: 'quz'
+            where: {
+                id: '3'
+            },
+            values: {
+                baz: 'quz'
+            }
         }),
         "UPDATE Bar SET baz = 'quz' WHERE (Bar.id = '3')"
     );
@@ -72,7 +80,9 @@ exports['Build delete sql.'] = function (test) {
     var builder = new SqlBuilder();
     test.equal(
         builder.deleteSql('Bar', {
-            id: '3'
+            where: {
+                id: '3'
+            }
         }),
         "DELETE FROM Bar WHERE (Bar.id = '3')"
     );

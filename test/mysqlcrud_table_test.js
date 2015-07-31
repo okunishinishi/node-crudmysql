@@ -73,7 +73,7 @@ exports['Mysqlcrud table'] = function (test) {
             });
         },
         function (callback) {
-            table.count({}, {
+            table.count({
                 order: ['last_name']
             }, function (err, count) {
                 test.ifError(err);
@@ -89,7 +89,7 @@ exports['Mysqlcrud table'] = function (test) {
             });
         },
         function (callback) {
-            table.list({}, {
+            table.list({
                 order: [{'last_name': false}],
                 limit: 1,
                 offset: 1

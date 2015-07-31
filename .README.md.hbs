@@ -38,16 +38,69 @@ Ensure to disconnect from database before exit.
 ### Execute sql.
 
 ```javascript
-{{{read 'docs/usages/04.execute.js'}}}
+{{{read 'docs/usages/03.execute.js'}}}
 ```
 
 ### CRUD with table.
 
-{{pkg.name}} table instance provides basic CURD functions.
+{{pkg.name}} table provides basic CURD functions.
+
+Use `mysqlcrud.table()` to create table instance.
 
 ```javascript
-{{{read 'docs/usages/03.table.js'}}}
+{{{read 'docs/usages/10.table.js'}}}
 ```
+
+###### `.create(data)`
+
+Create a single data.
+
+```javascript
+{{{read 'docs/usages/11.table_create.js'}}}
+```
+
+##### `.one(id)`
+
+Get a single data.
+
+```javascript
+{{{read 'docs/usages/12.table_one.js'}}}
+```
+
+##### `.update(id)`
+
+Update a single data.
+
+```javascript
+{{{read 'docs/usages/13.table_update.js'}}}
+```
+
+##### `.destroy(id)`
+
+Destroy a single data.
+
+```javascript
+{{{read 'docs/usages/14.table_destroy.js'}}}
+```
+
+##### `.count(id)`
+
+Count data.
+
+```javascript
+{{{read 'docs/usages/15.table_count.js'}}}
+```
+
+
+##### `.list(id)`
+
+List data.
+
+```javascript
+{{{read 'docs/usages/16.table_list.js'}}}
+```
+
+
 
 
 Options

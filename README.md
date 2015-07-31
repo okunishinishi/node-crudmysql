@@ -54,12 +54,26 @@ mysqlcrud.execute('show tables', function () {
 
 ### CRUD with table.
 
-mysqlcrud table instance provides basic CURD functions.
+mysqlcrud table provides basic CURD functions.
+
+Use `mysqlcrud.table()` to create table instance.
 
 ```javascript
 var userTable = mysqlcrud.table('user', {
-    // Table options
+    idKey: 'user_id'
 });
+
+
+
+
+```
+
+###### `.create(data)`
+
+Create a single data.
+
+```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
 
 // Create a new user record.
 userTable.create({
@@ -69,18 +83,73 @@ userTable.create({
     /**...**/
 });
 
+```
+
+##### `.one(id)`
+
+Get a single data.
+
+```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
+
 // Get a single user record with id.
 userTable.one(3, function (err, data) {
     /**...**/
 });
 
+```
+
+##### `.update(id)`
+
+Update a single data.
+
+```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
+
+// Update a single user record.
+userTable.update(3, {
+    // Values to update.
+    last_name: 'Super Okunishi'
+}, function (err, result) {
+    /**...**/
+});
+```
+
+##### `.destroy(id)`
+
+Destroy a single data.
+
+```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
+
+// Destroy data.
+userTable.destroy(3, function (err, result) {
+    /**...**/
+});
+```
+
+##### `.count(id)`
+
+Count data.
+
+```javascript
+
+```
+
+
+##### `.list(id)`
+
+List data.
+
+```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
 
 // List data.
 userTable.list({
-    // List condition.
-    last_name: 'Okunishi'
-}, {
-    // List Options.
+    where: {
+        // List condition.
+        last_name: 'Okunishi'
+    },
     order: [{'last_name': false}],
     limit: 20,
     offset: 20
@@ -89,28 +158,10 @@ userTable.list({
 });
 
 
-// Count data.
-userTable.count({
-    // Count condition.
-    last_name: 'Okunishi'
-}, function (err, data) {
-    /**...**/
-});
 
-
-// Update data.
-userTable.update(3, {
-    // Count condition.
-    last_name: 'Super Okunishi'
-}, function (err, result) {
-    /**...**/
-});
-
-// Destroy data.
-userTable.destroy(3, function (err, result) {
-    /**...**/
-});
 ```
+
+
 
 
 Options
