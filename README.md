@@ -132,6 +132,18 @@ userTable.destroy(3, function (err, result) {
 #### Count Records in a Table
 
 ```javascript
+var userTable = mysqlcrud.table('user', {/*options*/});
+
+// Count data.
+userTable.count({
+    where: {
+        // Count condition.
+        last_name: 'Okunishi'
+    },
+    order:['first_name']
+}, function (err, data) {
+    /**...**/
+});
 
 ```
 
