@@ -1,6 +1,6 @@
 {
   "name": "mysqlcrud",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Simple crud functions with mysql database.",
   "main": "index.js",
   "scripts": {
