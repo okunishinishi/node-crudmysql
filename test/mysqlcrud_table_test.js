@@ -154,30 +154,30 @@ exports['Do ref.'] = function (test) {
                 callback(err);
             })
         },
-        function (callback) {
-            productTable.list({
-                ref: {
-                    'shop_id': 'test_shop.id'
-                }
-            }, function (err, result) {
-                test.ok(result[0]);
-                test.ok(result[0]['test_shop']);
-                test.ifError(err);
-                callback(err);
-            });
-        },
-        function (callback) {
-            productTable.one(productId, {
-                ref: {
-                    'shop_id': 'test_shop.id'
-                }
-            }, function (err, result) {
-                test.ok(result);
-                test.ok(result['test_shop']);
-                test.ifError(err);
-                callback(err);
-            });
-        }
+        //function (callback) {
+        //    productTable.list({
+        //        ref: {
+        //            'shop_id': 'test_shop.id'
+        //        }
+        //    }, function (err, result) {
+        //        test.ok(result[0]);
+        //        test.ok(result[0]['test_shop']);
+        //        test.ifError(err);
+        //        callback(err);
+        //    });
+        //},
+        //function (callback) {
+        //    productTable.one(productId, {
+        //        ref: {
+        //            'shop_id': 'test_shop.id'
+        //        }
+        //    }, function (err, result) {
+        //        test.ok(result);
+        //        test.ok(result['test_shop']);
+        //        test.ifError(err);
+        //        callback(err);
+        //    });
+        //}
     ], function (err) {
         test.ifError(err);
         test.done();
