@@ -1,8 +1,8 @@
 {
   "name": "mysqlcrud",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Simple crud functions with mysql database.",
-  "main": "index.js",
+  "main": "lib",
   "scripts": {
     "build": "./ci/build.js",
     "test": "nodeunit test",
