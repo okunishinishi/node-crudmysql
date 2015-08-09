@@ -1,25 +1,23 @@
 #!/usr/bin/env node
 
+/**
+ * Build this project.
+ */
 "use strict";
 
-var async = require('async'),
-    path = require('path'),
+process.chdir(__dirname + '/..');
+
+var apeTasking = require('ape-tasking'),
     coz = require('coz');
 
-var basedir = path.resolve(__dirname, '..');
-
-process.chdir(basedir);
-
-async.series([
+apeTasking.runTasks('build', [
     function (callback) {
         coz.render([
             '.*.bud',
+            'docs/**/.*.bud',
             'lib/.*.bud',
             'test/.*.bud'
         ], callback);
     }
-], function (err) {
-    if (err) {
-        console.error(err);
-    }
-});
+], true);
+
